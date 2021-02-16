@@ -10,6 +10,9 @@ var $roleFld
 
 var userService = new UserServiceClient()
 
+var users = [
+  {username: "testuser3", password: "122222", firstName: "test1", lastName: "user", role: "Student"}
+]
 
 function deleteUser(event) {
   var button = $(event.target)
