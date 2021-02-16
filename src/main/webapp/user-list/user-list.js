@@ -24,10 +24,11 @@ function deleteUser(event) {
 function createUser() {
   // alert("create user")
   var newUser = {
-    title: $titleFld.val(),
-    section: $sectionFld.val(),
-    seats: $seatsFld.val(),
-    semester: $semesterFld.val()
+    username: $usernameFld.val(),
+    password: $passwordFld.val(),
+    firstName: $firstNameFld.val(),
+    lastName: $lastNameFld.val(),
+    role: $roleFld.val()
   }
 
   userService.createUser(newUser)
@@ -42,15 +43,19 @@ function selectUser(event) {
   var id = $(event.target).attr("id")
   console.log(id)
   selectedUser = users.find(user => user._id === id)
-  $titleFld.val(selectedUser.title)
-  $seatsFld.val(selectedUser.seats)
-  $semesterFld.val(selectedUser.semester)
+  $usernameFld.val(selectedUser.username)
+  $passwordFld.val(selectedUser.password)
+  $firstNameFld.val(selectedUser.firstName)
+  $lastNameFld.val(selectedUser.lastName)
+  $roleFld.val(selectedUser.role)
 }
 
 function updateUser() {
-  selectedUser.title = $titleFld.val()
-  selectedUser.semester = $semesterFld.val()
-  selectedUser.seats = $seatsFld.val()
+  selectedUser.username = $usernameFld.val()
+  selectedUser.password = $passwordFld.val()
+  selectedUser.firstName = $firstNameFld.val()
+  selectedUser.lastName = $lastNameFld.val()
+  selectedUser.role = $roleFld.val()
   userService.updateUser(selectedUser._id, selectedUser)
     .then(status => {
       var index = users.findIndex(user => user._id === selectedUser._id)
@@ -72,14 +77,14 @@ function renderUsers(users) {
           <td>${user.lastName}</td>
           <td>${user.role}</td>
           <td>
-              <button id="${i}" class="delete-btn">Delete</button>
-              <button id="${user._id}" class="select-btn">Select</button>
+              <button id="${i}" class="delete-btn"><i class="fa fa-trash"></i></button>
+              <button id="${user._id}" class="select-btn"><i class="fas fa-pencil-ruler"></i></button>
           </td>
       </tr>
       `)
   }
-  $(".neu-delete-btn").click(deleteUser)
-  $(".wbdv-select-btn").click(selectUser)
+  $(".delete-btn").click(deleteUser)
+  $(".select-btn").click(selectUser)
 }
 
 function main() {
